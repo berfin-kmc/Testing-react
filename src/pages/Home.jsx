@@ -1,11 +1,17 @@
-/* import { getContents } from "../utils"
+import SwiperComponent from "./SwiperComponent";
+import { getSliders } from "../utils";
+
+import { useLoaderData } from "react-router-dom";
 
 export async function loader() {
-getContents
-} */
+    return getSliders()
+}
 
 export default function Home() {
-    return <div className="flex justify-center items-center" style={{ height: "100vh"}}>
- <h1 className="text-white"> home content </h1>
+
+    const slidersData = useLoaderData();
+
+    return <div className="flex flex-col justify-center items-center" >
+        <SwiperComponent sliderData={slidersData} />
     </div>
 }

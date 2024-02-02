@@ -69,3 +69,51 @@ th {
     font-size: 14px;
     font-weight: 500;
 }
+
+.swiper {
+    height: 80vh;
+    width: 100%;
+}
+
+.swiper-slide {
+    color: white;
+    background-image: url("https://manufactronix.com/Images/Sliders/20b43632-f1f6-42e8-99b0-a26e8fa6c77fs10.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.slider-inner {
+    backdrop-filter:brightness(0.5);
+    height: 100%;
+    width: 100%;
+    padding: 0 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.slider-title {
+    margin-bottom: 25px;
+    line-height: 1.4;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.slider-inner a {
+    margin-top: 18px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    padding: 15px 40px;
+    position: relative;
+    border-radius: 4px;
+    z-index: 1;
+    text-transform: uppercase;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #ffffff;
+    background-color: #469d92;
+    -webkit-box-shadow: 0 13px 27px 0 rgba(68, 206, 111, 0.25);
+    box-shadow: 0 13px 27px 0 rgba(68, 206, 111, 0.25);
+}

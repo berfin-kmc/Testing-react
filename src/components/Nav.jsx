@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
+import { getMenus } from "../utils";
 
 
 import { Fragment, useState } from 'react'
@@ -15,11 +18,16 @@ function classNames(...classes) {
 
 
 
-export default function Nav({ menusData }) {
+export default function Nav({ postQuery }) {
 
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-    const menus = menusData.reduce((acc, menuItem) => {
+  
+
+    if (postQuery.isLoading) return <h1>Loading...</h1>
+    if (postQuery.isError) return <h1>Error!!!</h1>
+
+    const menus = postQuery.data.reduce((acc, menuItem) => {
 
         const parentMenu = acc[menuItem.id_Parent] || [];
         parentMenu.push(menuItem);
@@ -32,7 +40,7 @@ export default function Nav({ menusData }) {
     const mainMenuElements = mainMenus.map(mainMenu => {
 
         if (menus[mainMenu.id]) {
-            return  <Popover className="relative" key={mainMenu.id}>
+            return <Popover className="relative flex items-center" key={mainMenu.id}>
                 <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
                     {mainMenu.title}
                     <ChevronDownIcon className="h-5 w-5 flex-none text-white" aria-hidden="false" />
@@ -68,12 +76,12 @@ export default function Nav({ menusData }) {
                     </Popover.Panel>
                 </Transition>
             </Popover>
-          
+
         } else {
 
             return <NavLink key={mainMenu.id}
                 to={mainMenu.urlTitle}
-                className={menus[mainMenu.id] ? "text-red-500" : " " + "text-sm font-semibold leading-6 text-white px-5"} >
+                className={ menus[mainMenu.id] ? "text-red-500" : " " + "text-sm font-semibold leading-6 text-white  flex items-center"}  >
                 {mainMenu.title}
             </NavLink>
         }
@@ -124,7 +132,7 @@ export default function Nav({ menusData }) {
 
         <header className="absolute">
             <nav className="mx-auto flex w-screen items-center justify-between p-6" aria-label="Global">
-                <div className="flex lg:flex-1 h-full">
+                <div className="flex h-full">
                     <NavLink to={"/"} className="-m-1.5 p-1.5 w-full flex items-center">
                         <span className="sr-only">Manufactorinx</span>
                         <img className="h-full w-auto" src="src\assets\logo.png" alt="" />
@@ -140,15 +148,15 @@ export default function Nav({ menusData }) {
                         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                     </button>
                 </div>
-       
 
-                <Popover.Group   className="hidden lg:flex lg:gap-x-12 px-5"> 
-                
+
+                <Popover.Group className="hidden lg:flex lg:gap-x-8 px-3">
+
                     {mainMenuElements}
                 </Popover.Group>
 
 
-         
+
 
             </nav>
             <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -174,9 +182,9 @@ export default function Nav({ menusData }) {
                     </div>
                     <div className="mt-6 flow-root">
                         <div className="-my-6 divide-y divide-gray-500/10">
-                           
-                                {mobileMenuElements}
-                   
+
+                            {mobileMenuElements}
+
 
                         </div>
                     </div>

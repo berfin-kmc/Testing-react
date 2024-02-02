@@ -12,6 +12,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@tanstack/react-query": "^5.8.3",
+    "@tanstack/react-query-devtools": "^5.8.3",
     "dompurify": "^3.0.6",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
@@ -19,7 +21,8 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.18.0",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "swiper": "^11.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

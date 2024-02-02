@@ -1,13 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import Layout, { loader as menuLoader } from './components/Layout'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+import Layout from './components/Layout'
 import PagesLayout from './components/PagesLayout'
 
-import Home from './pages/Home'
+import Home, { loader as sliderLoader } from './pages/Home'
 import Services, { loader as serviceLoader } from './pages/Services'
 import Products, { loader as productsLoader } from './pages/Products'
-import { ContextProvider } from "./Context"
+import Error from './components/Error'
 
 import './App.css'
 
@@ -17,17 +19,20 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 
 
-
+const queryClient = new QueryClient()
 
 function App() {
 
+  const HomeElement = ['home', 'Home', '/'].map((path, i) => <Route key={i} path={path} element={<Home />} loader={sliderLoader} />)
+
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<Layout />} loader={menuLoader}>
-        <Route index path="Home" element={<Home />} />
+      <Route element={<Layout />} errorElement={<Error />} >
+        {HomeElement}
         <Route element={<PagesLayout />} >
           <Route path="Services" element={<Services />} loader={serviceLoader} />
           <Route path="machines-accessories" element={<Products />} loader={productsLoader} />
@@ -42,12 +47,11 @@ function App() {
   );
 }
 
-
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ContextProvider>
+  <QueryClientProvider client={queryClient}>
     <App />
-  </ContextProvider>
+    <ReactQueryDevtools />
+  </QueryClientProvider>
 );
 

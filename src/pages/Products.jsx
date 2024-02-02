@@ -1,8 +1,6 @@
-
 import { useLoaderData } from "react-router-dom";
 
 import DOMPurify from 'dompurify';
-
 
 
 import { getProducts } from "../utils";
@@ -19,10 +17,8 @@ export default function Products() {
 
     const productElements = products.map(product => {
 
-        // Your HTML string
-     
         const clean = DOMPurify.sanitize(product.details);
-    
+
         return <li className=""
             key={product.id}>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
@@ -48,7 +44,7 @@ export default function Products() {
 
 
             </div>
-                 <div className="text-white w-full flex justify-center my-16 table-wrapper" dangerouslySetInnerHTML={{ __html: clean }} />
+            <div className="text-white w-full flex justify-center my-16 table-wrapper" dangerouslySetInnerHTML={{ __html: clean }} />
         </li>
     });
 
