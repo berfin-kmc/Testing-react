@@ -42,5 +42,11 @@ export async function getProducts() {
     return data;
 }
 
+export async function getContents() {
+    const res = await fetch(`http://192.168.1.170:8070/api/Home/GetContents/1`)
+    const data = await res.json();
+    return data;
+}
+
 
 

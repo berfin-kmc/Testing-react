@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Layout from './components/Layout'
 import PagesLayout from './components/PagesLayout'
 
-import Home, { loader as sliderLoader } from './pages/Home'
+import Home, { loader as sliderLoader } from './pages/Home/Home'
 import Services, { loader as serviceLoader } from './pages/Services'
 import Products, { loader as productsLoader } from './pages/Products'
 import Error from './components/Error'

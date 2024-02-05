@@ -131,7 +131,7 @@ export default function Nav({ postQuery }) {
 
 
         <header className="absolute">
-            <nav className="mx-auto flex w-screen items-center justify-between p-6" aria-label="Global">
+            <nav className="mx-auto flex items-center justify-between p-6" aria-label="Global">
                 <div className="flex h-full">
                     <NavLink to={"/"} className="-m-1.5 p-1.5 w-full flex items-center">
                         <span className="sr-only">Manufactorinx</span>

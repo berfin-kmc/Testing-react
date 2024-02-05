@@ -5,6 +5,7 @@ import Nav from "./Nav";
 
 
 import { getMenus } from "../utils";
+import Footer from "./Footer";
 
 
 
@@ -20,6 +21,7 @@ export default function Layout() {
     <div className="app-content-wrap relative">
       <Nav  postQuery={postQuery} />
       <Outlet />
+      <Footer />
     </div>
   );
 }
