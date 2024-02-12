@@ -3,10 +3,10 @@ import { useLoaderData } from "react-router-dom";
 import DOMPurify from 'dompurify';
 
 
-import { getProducts } from "../utils";
+import { getModuleContent } from "../utils";
 
 export async function loader() {
-    return getProducts()
+    return getModuleContent("GetProducts")
 }
 
 

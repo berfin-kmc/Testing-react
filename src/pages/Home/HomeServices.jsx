@@ -11,9 +11,9 @@ export default function HomeServices({ content }) {
         }} />
     })
     return <div className="container">
-        <div class="section-title">
+        <div className="section-title">
             <h2>Services We Can Help You With</h2>
-            <div class="bar"></div>
+            <div className="bar"></div>
             <p>
                 We provide high quality and reliable EMS including turnkey solutions for your final product needs.
             </p>

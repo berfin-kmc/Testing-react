@@ -7,46 +7,68 @@ do not throw errors by default. If that's the case,
 you'll need to throw them on your own. 
  */
 
+
 async function getLang() {
-    const res =  await fetch("http://217.131.129.231:8086/api/Home/GetLanguagesList")
+    const res = await fetch("http://217.131.129.231:8086/api/Home/GetLanguagesList");
+    if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+    }
     const data = await res.json();
-    const langID = data[0].id
+    const langID = data[0].id;
     return langID;
 }
 
 export async function getMenus() {
-    const langID = await getLang();
-    const res = await fetch(`http://217.131.129.231:8086/api/Home/GetMenuList/${langID}`)
-    const data = await res.json();
-    return data;
+    try {
+        const langID = await getLang();
+        const res = await fetch(`http://217.131.129.231:8086/api/Home/GetMenuList/${langID}`);
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching menus:", error);
+        throw error;
+    }
 }
 
- export async function getSliders() {
-    const langID = await getLang();
-    const res = await fetch(`http://217.131.129.231:8086/api/Home/GetSliders/1`)
-    const data = await res.json();
-    return data;
-} 
-
-export async function getServices() {
-    const langID = await getLang();
-    const res = await fetch(`http://217.131.129.231:8086/api/Home/GetServices/${langID}`)
-    const data = await res.json();
-    return data;
+export async function getDynamicContent(fnName) {
+    try {
+        const menus = await getMenus();
+        const currentMenu = menus.filter(menu => menu.urlTitle === window.location.pathname.slice(1));
+        const menuId = currentMenu[0].id || 1;
+        const res = await fetch(`http://217.131.129.231:8086/api/Home/${fnName}/${menuId}`);
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching dynamic content:", error);
+        throw error;
+    }
 }
 
-export async function getProducts() {
-    const langID = await getLang();
-    const res = await fetch(`http://217.131.129.231:8086/api/Home/GetProducts/${langID}`)
-    const data = await res.json();
-    return data;
+export async function getModuleContent(fnName) {
+    try {
+        const langID = await getLang();
+        const res = await fetch(`http://217.131.129.231:8086/api/Home/${fnName}/${langID}`);
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching module content:", error);
+        throw error;
+    }
 }
 
-export async function getContents() {
-    const res = await fetch(`http://192.168.1.170:8070/api/Home/GetContents/1`)
-    const data = await res.json();
-    return data;
-}
+
+
+
+
 
 
 

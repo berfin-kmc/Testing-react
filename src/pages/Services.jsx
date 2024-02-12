@@ -3,11 +3,11 @@ import { useLoaderData } from "react-router-dom";
 
 import DOMPurify from 'dompurify';
 
-import { getServices } from "../utils";
+import { getModuleContent  } from "../utils";
 import { useQuery } from "@tanstack/react-query";
 
 export async function loader() {
-    return getServices()
+    return getModuleContent("GetServices")
 }
 
 
@@ -15,7 +15,7 @@ export default function Services() {
 
     const postQuery = useQuery({
         queryKey: ["servicesData"],
-        queryFn: () => getServices()
+        queryFn: () => getModuleContent("GetServices")
     })
 
 

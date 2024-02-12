@@ -7,7 +7,9 @@ import Layout from './components/Layout'
 import PagesLayout from './components/PagesLayout'
 
 import Home, { loader as sliderLoader } from './pages/Home/Home'
+import Contact, {loader as contactLoader} from './pages/Contact/Contact'
 import Services, { loader as serviceLoader } from './pages/Services'
+import ComponyProfile, {loader as ComponyProfileLoader} from './pages/About/ComponyProfile'
 import Products, { loader as productsLoader } from './pages/Products'
 import Error from './components/Error'
 
@@ -34,8 +36,10 @@ function App() {
       <Route element={<Layout />} errorElement={<Error />} >
         {HomeElement}
         <Route element={<PagesLayout />} >
+          <Route path="Compony-Profile" element={<ComponyProfile />} loader={ComponyProfileLoader} />
           <Route path="Services" element={<Services />} loader={serviceLoader} />
           <Route path="machines-accessories" element={<Products />} loader={productsLoader} />
+          <Route path="Contact" element={<Contact />} loader={contactLoader} />
         </Route>
       </Route>
     )

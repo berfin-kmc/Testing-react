@@ -1,5 +1,5 @@
-import SwiperComponent from "../SwiperComponent";
-import { getSliders, getContents } from "../../utils";
+import SwiperComponent from "./SwiperComponent";
+import { getDynamicContent} from "../../utils";
 
 
 import { useLoaderData } from "react-router-dom";
@@ -10,8 +10,8 @@ import DiscoverArea from "./DiscoverArea";
 
 export async function loader() {
     const loaderData = {
-        sliders: await getSliders(),
-        content: await getContents()
+        sliders: await getDynamicContent("GetSliders"),
+        content: await getDynamicContent("GetContents")
     }
     return loaderData
 }
